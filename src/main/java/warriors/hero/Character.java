@@ -14,6 +14,9 @@ public abstract class Character implements Hero {
 		this.hP=hP;
 		
 	}
+	public void setName(String Name) {
+		this.Name=Name;
+	}
 
 	public String getName() {
 		

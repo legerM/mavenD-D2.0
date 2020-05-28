@@ -14,9 +14,10 @@ public class GameEtat implements GameState {
 	MapChoice map;
 	String lastlog;
 	public int currentCase;
-	
+	int gamecount = 0;
+	int ID;
 
-	public GameEtat(String playername, String gameId, Hero hero, MapChoice map ){
+	public GameEtat(String playername, String gameId, Hero hero, MapChoice map ,int ID){
 
 		this.playername=playername;
 		this.gameId=gameId;
@@ -25,17 +26,42 @@ public class GameEtat implements GameState {
 		this.lastlog=gameId;
 		this.currentCase=0;
 		this.Gamestat=GameStatus.IN_PROGRESS;
+		this.ID=ID;
+	}
+
+	public GameEtat() {
+
 
 	}
 
-
+	public GameEtat(String playername, String gameId, Hero hero, MapChoice map) {
+		this.playername=playername;
+		this.gameId=gameId;
+		this.hero=hero;
+		this.map=map;
+		this.lastlog=gameId;
+		this.currentCase=0;
+		this.Gamestat=GameStatus.IN_PROGRESS;
+		
+	}
+	
+public void setID(int ID) {
+	this.ID=ID;
+	
+}
+public int getID() {
+	return ID;
+	
+}
 	public String getPlayerName() {
 
 		// TODO Auto-generated method stub
 		return playername;
 	}
 
-
+	public void setPlayerName(String playername) {
+		this.playername=playername;
+	}
 	public String getGameId() {
 
 		// TODO Auto-generated method stub
@@ -43,7 +69,11 @@ public class GameEtat implements GameState {
 
 	}
 
-
+	public void SetGameId(String gameId) {
+		this.gameId=gameId;
+	}
+	
+	
 	public GameStatus getGameStatus() {
 
 		// TODO Auto-generated method stub
@@ -74,7 +104,7 @@ public class GameEtat implements GameState {
 
 	}
 	public void setGameStatus(GameStatus Gamestat) {
-			this.Gamestat=Gamestat;
+		this.Gamestat=Gamestat;
 	}
 
 	public void moveForward(int dice,GameEtat gameS) {
@@ -86,20 +116,20 @@ public class GameEtat implements GameState {
 			Gamestat = GameStatus.FINISHED;
 			setGameStatus(Gamestat);
 			setLastLog("Vous etes sorti du Donjon !");
-			
+
 		}
 
 		else {
 
 			Case caseToPlay = this.map.getCaseAtPosition(currentCase);
-			
-		
+
+
 			lastlog = caseToPlay.toString();
 			setLastLog("vous etes a la case : " + currentCase);
 			setCurrentCase(currentCase);
 			caseToPlay.launchEvent(gameS);
-//			System.out.println(gnu);
-			
+			//			System.out.println(gnu);
+
 		}
 	}
 
@@ -109,8 +139,8 @@ public class GameEtat implements GameState {
 	public void setCurrentCase(int currentCase){
 		this.currentCase=currentCase; 
 	}
-	
-	
+
+
 }
 
 
